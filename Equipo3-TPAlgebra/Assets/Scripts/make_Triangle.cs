@@ -17,8 +17,10 @@ public class make_Triangle : MonoBehaviour
         {
             for (int j = 2; j < BALLCANT; j++)
             {
+
+
             }
-            balls[i].transform.position = new Vector2(, 0);
+            balls[i].transform.position = new Vector2(0, 0);
         }
     }
 
