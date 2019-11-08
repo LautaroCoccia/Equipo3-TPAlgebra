@@ -8,7 +8,6 @@ public class radius_otherBalls : MonoBehaviour
 
     public GameObject other_ball;
     public GameObject point_extreme;
-
     //Variables
 
     public float other_ball_x;

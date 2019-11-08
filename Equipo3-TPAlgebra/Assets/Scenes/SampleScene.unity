@@ -688,7 +688,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &808643845
 Transform:
   m_ObjectHideFlags: 0
@@ -1065,8 +1065,10 @@ MonoBehaviour:
   whiteBall: {fileID: 1929959552}
   cue_extreme: {fileID: 1821368672}
   impact_point: {fileID: 550077366}
+  radius: {fileID: 0}
   vel: 0
   mass: 0
+  speedForce: 1.5
 --- !u!4 &1929959554 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1143589314750887699, guid: f158af3cd9018354093c4b8108bb7d57,

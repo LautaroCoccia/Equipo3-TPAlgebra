@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
 public class cue_logicMovement : MonoBehaviour
 {
     public GameObject whiteBall;
     public GameObject cue_extreme;
     public GameObject impact_point;
+    public radius_Whiteball radius;
 
     public float vel;
     public float mass;
@@ -19,6 +22,8 @@ public class cue_logicMovement : MonoBehaviour
         Vector2 mousePosition = Input.mousePosition;
         mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
         Vector2 direction = new Vector2((mousePosition.x - whiteBall.transform.position.x), (mousePosition.y - whiteBall.transform.position.y));
+      //  Vector2 direction = new Vector2((mousePosition.x), (mousePosition.y));
+
         whiteBall.gameObject.transform.up = direction;
 
         //Setea la posicion del punto de impacto a un vector2.
@@ -31,17 +36,19 @@ public class cue_logicMovement : MonoBehaviour
 
         Vector2 ballPos = new Vector2(whiteBall.transform.position.x, whiteBall.transform.position.y);
 
-        if (Input.GetMouseButtonDown(1) || isBallMoving)
+        if (Input.GetMouseButtonDown(0) || isBallMoving == true)
         {
             isBallMoving = true;
-            Test_ball_movement(ballPos,direction);
+            Test_ball_movement(ballPos, direction);
         }
 
     }
 
     void Test_ball_movement(Vector2 ballPos, Vector2 direction)
     {
-        whiteBall.gameObject.transform.position = new Vector2((ballPos.x + (speedForce * Time.deltaTime)) + (direction.x*Time.deltaTime), (ballPos.y + (speedForce * Time.deltaTime)) + (direction.y * Time.deltaTime));
+
+        //whiteBall.gameObject.transform.position = new Vector2((ballPos.x + (speedForce * Time.deltaTime)) + (direction.x * Time.deltaTime), (ballPos.y + (speedForce * Time.deltaTime)) + (direction.y * Time.deltaTime));
+        whiteBall.gameObject.transform.position = new Vector2((ballPos.x + radius.white_ball_radius) * Time.deltaTime, (ballPos.y + radius.white_ball_radius) * Time.deltaTime);
     }
 
 }
