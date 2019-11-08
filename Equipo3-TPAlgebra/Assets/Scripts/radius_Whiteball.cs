@@ -9,6 +9,10 @@ public class radius_Whiteball : MonoBehaviour
     public GameObject white_ball;
     public GameObject point_extreme;
     public GameObject cue;
+    public GameObject leftCorner;
+    public GameObject rightCorner;
+    public GameObject topCorner;
+    public GameObject bottomCorner;
     public Camera camera;
 
     //Vriables
@@ -54,7 +58,18 @@ public class radius_Whiteball : MonoBehaviour
             AlreadyClick = false;
             cue.gameObject.SetActive(true);
         }
-        
+        if (this.transform.position.x - this.white_ball_radius <= leftCorner.transform.position.x || this.transform.position.x + this.white_ball_radius >= rightCorner.transform.position.x)
+        {
+            isMoving = false;
+            AlreadyClick = false;
+            cue.gameObject.SetActive(true);
+        }
+        if (this.transform.position.y - this.white_ball_radius <= bottomCorner.transform.position.y || this.transform.position.y + this.white_ball_radius >= topCorner.transform.position.y)
+        {
+            isMoving = false;
+            AlreadyClick = false;
+            cue.gameObject.SetActive(true);
+        }
     }   
 
     void calcRad()
