@@ -1089,11 +1089,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   white_ball: {fileID: 1929959552}
   point_extreme: {fileID: 1457907826}
+  cue: {fileID: 102606352}
+  camera: {fileID: 519420031}
   white_ball_x: 0
   white_ball_y: 0
   point_extreme_x: 0
   point_extreme_y: 0
   white_ball_radius: 0
+  AlreadyClick: 0
+  isMoving: 0
+  speed: 20
+  MousePos: {x: 0, y: 0, z: 0}
 --- !u!1 &1985618305
 GameObject:
   m_ObjectHideFlags: 0
