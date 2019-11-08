@@ -21,6 +21,7 @@ public class make_Triangle : MonoBehaviour
 
             }
             balls[i].transform.position = new Vector2(0, 0);
+          
         }
     }
 
