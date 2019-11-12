@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class make_Triangle : MonoBehaviour
+public class makeTriangle : MonoBehaviour
 {
     public GameObject triangle;
     public GameObject[] balls;
     const int BALLCANT = 16;
-    public float ballRadius = 2.555f;
+    public float ballRadius = 0.2555f;
 
 
     void Start()

@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: a22df401ab4ddd84c9d3d833e1b0869b
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - whiteBall: {instanceID: 0}
+  - balls: {instanceID: 0}
+  - leftCornerPoint: {instanceID: 0}
+  - rigthCornerPoint: {instanceID: 0}
+  - bottomCornerPoint: {instanceID: 0}
+  - topCornerPoint: {instanceID: 0}
+  - radForballs: {fileID: 11500000, guid: b2caaccb8d02c17428176e941ae8add1, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
