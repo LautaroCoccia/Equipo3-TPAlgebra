@@ -23,9 +23,9 @@ public class whiteBallMovement : MonoBehaviour
 
     public float mass;
     public float distanceSpeed;
-    private float gravity = 9.8f;
+    private float gravity = -9.8f;
     public float vel;
-    public float uCoeficient = 0.14f;
+    private float uCoeficient = 0.14f;
     public float forceNewton;
     public float roceForce;
 
@@ -46,8 +46,8 @@ public class whiteBallMovement : MonoBehaviour
     //Functions
     private void Start()
     {
-        forceNewton = mass * gravity;
-        vel = distanceSpeed * Time.deltaTime;
+        forceNewton = mass / gravity;
+        vel = distanceSpeed / Time.deltaTime;
         roceForce = uCoeficient * forceNewton;
         camera = Camera.main;
         aux = (Vector2)(whiteBall.transform.position);
@@ -71,6 +71,7 @@ public class whiteBallMovement : MonoBehaviour
             directionTarget = (Vector2)(MousePos - transform.position);
             directionTarget.Normalize();
             StartCoroutine(BallMovement(directionTarget));
+            StartCoroutine(DecreaseRoceForce(roceForce));
         }
         if (Input.GetKey(KeyCode.Mouse0) && distanceSpeed <= maxDistanceSpeed)
         {
@@ -168,8 +169,18 @@ public class whiteBallMovement : MonoBehaviour
     {
         for (int i = 0; i < 25; i++)
         {
-            transform.position += (_direction * (vel - (restRoceForce(roceForce) * Time.deltaTime)));
+            transform.position += (_direction * (vel + (restRoceForce(roceForce))));
             yield return new WaitForEndOfFrame();
+        }
+
+    }
+
+    IEnumerator DecreaseRoceForce(float roceForce)
+    {
+       while(roceForce > 0)
+        {
+            restRoceForce(roceForce);
+            yield return new WaitForSeconds(0.5f);
         }
 
     }
@@ -178,7 +189,7 @@ public class whiteBallMovement : MonoBehaviour
     {
         float rForce = 0;
 
-        rForce = roceForce * Time.deltaTime;
+        rForce = roceForce * (Mathf.Pow(Time.deltaTime,2));
 
         return rForce;
     }

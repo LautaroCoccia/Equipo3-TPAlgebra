@@ -2604,10 +2604,9 @@ MonoBehaviour:
   whiteBallX: 0
   whiteBallY: 0
   whiteBallRadius: 0
-  mass: 20
+  mass: 1
   distanceSpeed: 1
   vel: 0
-  uCoeficient: 0.2
   forceNewton: 0
   roceForce: 0
   AlreadyClick: 0
