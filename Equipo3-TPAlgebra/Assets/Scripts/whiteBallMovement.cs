@@ -57,7 +57,7 @@ public class whiteBallMovement : MonoBehaviour
     {
         vel = distanceSpeed * Time.deltaTime;
 
-        if (aux == (Vector2)(whiteBall.transform.position) && Input.GetKey(KeyCode.Space) == false)
+        if (Input.GetKeyDown(KeyCode.Mouse0) && Input.GetKey(KeyCode.Space) == false)
         {
             distanceSpeed = 1.0f;
         }
@@ -65,16 +65,16 @@ public class whiteBallMovement : MonoBehaviour
         aux = (Vector2)(whiteBall.transform.position);
         
 
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKeyUp(KeyCode.Mouse0))
         {
             MousePos = (Vector2)(camera.ScreenToWorldPoint(Input.mousePosition));
             directionTarget = (Vector2)(MousePos - transform.position);
             directionTarget.Normalize();
             StartCoroutine(BallMovement(directionTarget));
         }
-        if (Input.GetKey(KeyCode.Space) && distanceSpeed <= maxDistanceSpeed)
+        if (Input.GetKey(KeyCode.Mouse0) && distanceSpeed <= maxDistanceSpeed)
         {
-            distanceSpeed += 0.1f;
+            distanceSpeed += 0.2f;
         }
 
         /*calcRad();
