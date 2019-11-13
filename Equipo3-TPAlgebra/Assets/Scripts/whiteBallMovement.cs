@@ -39,6 +39,8 @@ public class whiteBallMovement : MonoBehaviour
     public Vector2 directionTarget;
     public Vector3 oppositeDirection;
     float invertVector = -1;
+    Vector2 aux = new Vector2();
+    float maxDistanceSpeed = 80.0f;
 
 
     //Functions
@@ -48,11 +50,20 @@ public class whiteBallMovement : MonoBehaviour
         vel = distanceSpeed * Time.deltaTime;
         roceForce = uCoeficient * forceNewton;
         camera = Camera.main;
+        aux = (Vector2)(whiteBall.transform.position);
     }
 
     void Update()
     {
         vel = distanceSpeed * Time.deltaTime;
+
+        if (aux == (Vector2)(whiteBall.transform.position) && Input.GetKey(KeyCode.Space) == false)
+        {
+            distanceSpeed = 1.0f;
+        }
+
+        aux = (Vector2)(whiteBall.transform.position);
+        
 
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
@@ -61,9 +72,9 @@ public class whiteBallMovement : MonoBehaviour
             directionTarget.Normalize();
             StartCoroutine(BallMovement(directionTarget));
         }
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space) && distanceSpeed <= maxDistanceSpeed)
         {
-            distanceSpeed = distanceSpeed + 0.1f;
+            distanceSpeed += 0.1f;
         }
 
         /*calcRad();
@@ -157,7 +168,7 @@ public class whiteBallMovement : MonoBehaviour
     {
         for (int i = 0; i < 25; i++)
         {
-            transform.position += (_direction  * ( vel - (restRoceForce(roceForce) * Time.deltaTime)));
+            transform.position += (_direction * (vel - (restRoceForce(roceForce) * Time.deltaTime)));
             yield return new WaitForEndOfFrame();
         }
 
