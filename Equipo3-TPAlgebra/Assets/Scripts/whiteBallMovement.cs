@@ -16,29 +16,29 @@ public class whiteBallMovement : MonoBehaviour
 
     //Vriables
 
-        //WhiteBall & OthersValues
-        public float whiteBallX;
-        public float whiteBallY;
-        public float whiteBallRadius;
+    //WhiteBall & OthersValues
+    public float whiteBallX;
+    public float whiteBallY;
+    public float whiteBallRadius;
 
-        public float mass;
-        private float gravity = 9.8f;
-        private float vel;
-        private float uCoeficient = 0.20f;
-        private float forceNewton;
-        private float roceForce;
+    public float mass;
+    public float distanceSpeed;
+    private float gravity = 9.8f;
+    public float vel;
+    public float uCoeficient = 0.14f;
+    public float forceNewton;
+    public float roceForce;
 
-        //Movement
-        public bool AlreadyClick = false;
-        public bool isMoving = false;
-        public bool hasCrash = false;
-        public float distanceSpeed;
+    //Movement
+    public bool AlreadyClick = false;
+    public bool isMoving = false;
+    public bool hasCrash = false;
 
-        //Vectors & values
-        public Vector3 MousePos;
-        public Vector3 directionTarget;
-        public Vector3 oppositeDirection;
-        float invertVector = -1;
+    //Vectors & values
+    public Vector3 MousePos;
+    public Vector2 directionTarget;
+    public Vector3 oppositeDirection;
+    float invertVector = -1;
 
 
     //Functions
@@ -47,11 +47,26 @@ public class whiteBallMovement : MonoBehaviour
         forceNewton = mass * gravity;
         vel = distanceSpeed * Time.deltaTime;
         roceForce = uCoeficient * forceNewton;
+        camera = Camera.main;
     }
-   
+
     void Update()
     {
-        calcRad();
+        vel = distanceSpeed * Time.deltaTime;
+
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            MousePos = (Vector2)(camera.ScreenToWorldPoint(Input.mousePosition));
+            directionTarget = (Vector2)(MousePos - transform.position);
+            directionTarget.Normalize();
+            StartCoroutine(BallMovement(directionTarget));
+        }
+        if (Input.GetKey(KeyCode.Space))
+        {
+            distanceSpeed = distanceSpeed + 0.1f;
+        }
+
+        /*calcRad();
 
         if (isMoving == false)
         {
@@ -128,14 +143,33 @@ public class whiteBallMovement : MonoBehaviour
                 cue.gameObject.SetActive(false);
             }
 
-        }
-    }   
+        }*/
+    }
 
     void calcRad()
-    { 
+    {
         whiteBallX = whiteBall.gameObject.transform.position.x;
         whiteBallY = whiteBall.gameObject.transform.position.y;
         whiteBallRadius = 0.2555f;
+    }
+
+    IEnumerator BallMovement(Vector3 _direction)
+    {
+        for (int i = 0; i < 25; i++)
+        {
+            transform.position += (_direction  * ( vel - (restRoceForce(roceForce) * Time.deltaTime)));
+            yield return new WaitForEndOfFrame();
+        }
+
+    }
+
+    float restRoceForce(float roceForce)
+    {
+        float rForce = 0;
+
+        rForce = roceForce * Time.deltaTime;
+
+        return rForce;
     }
 
 }
