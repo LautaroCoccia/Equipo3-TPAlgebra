@@ -152,6 +152,7 @@ GameObject:
   m_Component:
   - component: {fileID: 102606355}
   - component: {fileID: 102606354}
+  - component: {fileID: 102606353}
   m_Layer: 0
   m_Name: cue
   m_TagString: Untagged
@@ -159,6 +160,25 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!95 &102606353
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 102606352}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c0ace85bb31fbed4e815bd5a1d0942f9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!212 &102606354
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2533,6 +2553,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1821368673}
+  - component: {fileID: 1821368674}
   m_Layer: 0
   m_Name: point_extreme
   m_TagString: Untagged
@@ -2554,6 +2575,25 @@ Transform:
   m_Father: {fileID: 102606355}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1821368674
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1821368672}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9504909dfd3f6a34a9faeac8355eddd9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1929959552 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1143589314750887697, guid: f158af3cd9018354093c4b8108bb7d57,
@@ -2601,20 +2641,17 @@ MonoBehaviour:
   topCorner: {fileID: 1149262406}
   bottomCorner: {fileID: 697517756}
   camera: {fileID: 519420031}
-  whiteBallX: 0
-  whiteBallY: 0
   whiteBallRadius: 0
-  mass: 1
+  mass: 5
   distanceSpeed: 1
   vel: 0
   forceNewton: 0
   roceForce: 0
-  AlreadyClick: 0
-  isMoving: 0
-  hasCrash: 0
   MousePos: {x: 0, y: 0, z: 0}
   directionTarget: {x: 0, y: 0}
   oppositeDirection: {x: 0, y: 0, z: 0}
+  invertVector: -1
+  cueAnim: {fileID: 102606353}
 --- !u!114 &1929959556
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2643,13 +2680,6 @@ MonoBehaviour:
   - {fileID: 1468163889}
   - {fileID: 697517756}
   - {fileID: 1143339025}
-  wallPoint:
-  - {fileID: 1071129318}
-  - {fileID: 1807234390}
-  - {fileID: 1653563751}
-  - {fileID: 1528144055}
-  - {fileID: 748173415}
-  - {fileID: 352905247}
   ballsRads: {fileID: 1988535014}
   whiteBallRad: {fileID: 1929959555}
   distanciasCorners:

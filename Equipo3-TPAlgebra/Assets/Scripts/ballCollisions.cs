@@ -10,7 +10,6 @@ public class ballCollisions : MonoBehaviour
     public GameObject[] corners;
     public GameObject[] balls;
     public GameObject[] walls;
-    public GameObject[] wallPoint;
 
     public radiusOtherBalls ballsRads;
     public whiteBallMovement whiteBallRad;
@@ -24,19 +23,18 @@ public class ballCollisions : MonoBehaviour
 
     Vector2 pointWall;
 
-
     void Update()
     {
         allCornerRadius = ballsRads.otherBallRadius;
 
-        calcCollisionCorners();
+        CalcCollisionCorners();
 
-        calcCollisionWalls();
+        CalcCollisionWalls();
 
         //calcCollisionBalls();
     }
 
-    void calcCollisionCorners()
+    void CalcCollisionCorners()
     {
 
         for (int i = 0; i < cornersCant; i++)
@@ -71,9 +69,12 @@ public class ballCollisions : MonoBehaviour
 
     }
 
-    void calcCollisionWalls()
+    void CalcCollisionWalls()
     {
-       
+
+
+
+       /*
         for (int i = 0; i < wallsCant; i++)
         {
             pointWall = new Vector2(wallPoint[i].transform.position.x, wallPoint[i].transform.position.y);
@@ -99,7 +100,7 @@ public class ballCollisions : MonoBehaviour
         {
             Debug.Log("La bola blanca colisiono con la pared Derecha...");
         }
-
+        */
     }
 
     /*

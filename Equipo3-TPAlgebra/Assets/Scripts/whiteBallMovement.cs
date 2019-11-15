@@ -17,38 +17,33 @@ public class whiteBallMovement : MonoBehaviour
     //Vriables
 
     //WhiteBall & OthersValues
-    public float whiteBallX;
-    public float whiteBallY;
-    public float whiteBallRadius;
+    public float whiteBallRadius = 0.2555f;
 
     public float mass;
     public float distanceSpeed;
     private float gravity = -9.8f;
     public float vel;
-    private float uCoeficient = 0.14f;
+    private float uCoeficient = 0.15f;
     public float forceNewton;
     public float roceForce;
 
     //Movement
-    public bool AlreadyClick = false;
-    public bool isMoving = false;
-    public bool hasCrash = false;
-
     //Vectors & values
     public Vector3 MousePos;
     public Vector2 directionTarget;
     public Vector3 oppositeDirection;
-    float invertVector = -1;
+    public float invertVector = -1;
     Vector2 aux = new Vector2();
-    float maxDistanceSpeed = 80.0f;
+    float maxDistanceSpeed = 100.0f;
 
+    public Animator cueAnim;
 
     //Functions
     private void Start()
     {
         forceNewton = mass / gravity;
-        vel = distanceSpeed / Time.deltaTime;
-        roceForce = uCoeficient * forceNewton;
+        Mathf.Abs(forceNewton);
+        roceForce =   uCoeficient * forceNewton;
         camera = Camera.main;
         aux = (Vector2)(whiteBall.transform.position);
     }
@@ -57,28 +52,31 @@ public class whiteBallMovement : MonoBehaviour
     {
         vel = distanceSpeed * Time.deltaTime;
 
-        if (Input.GetKeyDown(KeyCode.Mouse0) && Input.GetKey(KeyCode.Space) == false)
+        if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             distanceSpeed = 1.0f;
         }
 
         aux = (Vector2)(whiteBall.transform.position);
-        
 
         if (Input.GetKeyUp(KeyCode.Mouse0))
         {
+            cueAnim.SetBool("IsOnCharge", false);
+            
             MousePos = (Vector2)(camera.ScreenToWorldPoint(Input.mousePosition));
             directionTarget = (Vector2)(MousePos - transform.position);
             directionTarget.Normalize();
             StartCoroutine(BallMovement(directionTarget));
             StartCoroutine(DecreaseRoceForce(roceForce));
+
         }
         if (Input.GetKey(KeyCode.Mouse0) && distanceSpeed <= maxDistanceSpeed)
         {
+            cueAnim.SetBool("IsOnCharge", true);
             distanceSpeed += 0.2f;
         }
 
-        /*calcRad();
+        /*
 
         if (isMoving == false)
         {
@@ -158,18 +156,28 @@ public class whiteBallMovement : MonoBehaviour
         }*/
     }
 
-    void calcRad()
+    void calcNewDirection()
     {
-        whiteBallX = whiteBall.gameObject.transform.position.x;
-        whiteBallY = whiteBall.gameObject.transform.position.y;
-        whiteBallRadius = 0.2555f;
+        
     }
 
     IEnumerator BallMovement(Vector3 _direction)
     {
+        cueAnim.SetBool("IsOnDischarge", true);
+
+        yield return new WaitForSeconds(0.25f);
+
+        cue.gameObject.SetActive(false);
+
         for (int i = 0; i < 25; i++)
         {
             transform.position += (_direction * (vel + (restRoceForce(roceForce))));
+
+            if (i == 24)
+            {
+                cueAnim.SetBool("IsOnDischarge", false);
+                cue.gameObject.SetActive(true);
+            }
             yield return new WaitForEndOfFrame();
         }
 
