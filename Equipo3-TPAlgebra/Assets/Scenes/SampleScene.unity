@@ -2638,8 +2638,10 @@ MonoBehaviour:
   cue: {fileID: 102606352}
   leftCorner: {fileID: 473924913}
   rightCorner: {fileID: 299397425}
-  topCorner: {fileID: 1149262406}
-  bottomCorner: {fileID: 697517756}
+  topCorner1: {fileID: 1149262406}
+  bottomCorner1: {fileID: 697517756}
+  topCorner2: {fileID: 1468163889}
+  bottomCorner2: {fileID: 1143339025}
   camera: {fileID: 519420031}
   whiteBallRadius: 0
   mass: 5
@@ -2651,6 +2653,8 @@ MonoBehaviour:
   directionTarget: {x: 0, y: 0}
   oppositeDirection: {x: 0, y: 0, z: 0}
   invertVector: -1
+  changeSideX: 0
+  changeSideY: 0
   cueAnim: {fileID: 102606353}
 --- !u!114 &1929959556
 MonoBehaviour:

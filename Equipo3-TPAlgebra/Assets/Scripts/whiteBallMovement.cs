@@ -39,6 +39,7 @@ public class whiteBallMovement : MonoBehaviour
     float maxDistanceSpeed = 100.0f;
     public bool changeSideX = false;
     public bool changeSideY = false;
+    
 
     public Animator cueAnim;
 
@@ -67,25 +68,18 @@ public class whiteBallMovement : MonoBehaviour
         {
 
             cueAnim.SetBool("IsOnCharge", false);
-            
             MousePos = (Vector2)(camera.ScreenToWorldPoint(Input.mousePosition));
-            directionTarget = (Vector2)(MousePos - transform.position);
+            if (changeSideY == false)
+            {
+                directionTarget = (Vector2)(MousePos - transform.position);
+            }
             directionTarget.Normalize();
-           // if (changeSideX == false || changeSideY == false)
+           //if (changeSideX == false || changeSideY == false)
             {
                 StartCoroutine(BallMovement(directionTarget));
                 StartCoroutine(DecreaseRoceForce(roceForce));
             }
-            /*if (changeSideY == false && changeSideX == true)
-            {
-                StartCoroutine(BallMovementNegX(directionTarget));
-                StartCoroutine(DecreaseRoceForce(roceForce));
-            }
-            if (changeSideY == true && changeSideX == false)
-            {
-                StartCoroutine(BallMovementNegY(directionTarget));
-                StartCoroutine(DecreaseRoceForce(roceForce));
-            }*/
+         
         }
         if (Input.GetKey(KeyCode.Mouse0) && distanceSpeed <= maxDistanceSpeed)
         {
@@ -93,22 +87,27 @@ public class whiteBallMovement : MonoBehaviour
             distanceSpeed += 0.2f;
         }
 
-        if ((this.transform.position.x - whiteBallRadius) <= leftCorner.transform.position.x || (this.transform.position.x + whiteBallRadius) >= rightCorner.transform.position.x)
+        if ((this.transform.position.x - whiteBallRadius) <= leftCorner.transform.position.x || (this.transform.position.x + whiteBallRadius)  >= rightCorner.transform.position.x && !changeSideY)
         {
-          //  changeSideX = !changeSideX;
             Debug.Log("Chocó en los costados");
+            oppositeDirection.x = (invertVector *  directionTarget.x);
+            oppositeDirection.y = (directionTarget.y);
+
+            transform.position += (oppositeDirection * (vel + restRoceForce(roceForce)));
+
+            //changeSideY = true;
         }
 
         if ((this.transform.position.y - whiteBallRadius) <= bottomCorner1.transform.position.y || (this.transform.position.y - whiteBallRadius) <= bottomCorner2.transform.position.y || (this.transform.position.y + whiteBallRadius) >= topCorner1.transform.position.y || (this.transform.position.y + whiteBallRadius) >= topCorner2.transform.position.y)
         {
-           // changeSideY = !changeSideY;
             Debug.Log("Chocó arriba o abajo");
-        }
-        
-    }
 
-    void calcNewDirection()
-    {
+            oppositeDirection.x = (directionTarget.x);
+            oppositeDirection.y = (invertVector * directionTarget.y);
+
+            transform.position += (oppositeDirection * (vel + restRoceForce(roceForce)));
+
+        }
         
     }
 
