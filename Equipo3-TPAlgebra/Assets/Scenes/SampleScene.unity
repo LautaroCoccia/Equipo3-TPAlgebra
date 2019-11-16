@@ -2644,8 +2644,8 @@ MonoBehaviour:
   bottomCorner2: {fileID: 1143339025}
   camera: {fileID: 519420031}
   whiteBallRadius: 0
-  mass: 5
-  distanceSpeed: 1
+  mass: 100
+  distanceSpeed: 0
   vel: 0
   forceNewton: 0
   roceForce: 0
@@ -2653,8 +2653,8 @@ MonoBehaviour:
   directionTarget: {x: 0, y: 0}
   oppositeDirection: {x: 0, y: 0, z: 0}
   invertVector: -1
-  changeSideX: 0
-  changeSideY: 0
+  hasCrash: 0
+  isMoving: 0
   cueAnim: {fileID: 102606353}
 --- !u!114 &1929959556
 MonoBehaviour:

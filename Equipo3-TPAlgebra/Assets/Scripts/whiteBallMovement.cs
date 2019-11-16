@@ -34,12 +34,17 @@ public class whiteBallMovement : MonoBehaviour
     public Vector3 MousePos;
     public Vector2 directionTarget;
     public Vector3 oppositeDirection;
+    public Vector3 oppositeDirection2;
     public float invertVector = -1;
     Vector2 aux = new Vector2();
+    Vector2 vecResBallMouse = new Vector2();
+
     float maxDistanceSpeed = 100.0f;
-    public bool changeSideX = false;
-    public bool changeSideY = false;
-    
+    public bool hasCrash = false;
+    public bool isMoving = false;
+    public bool doInerci = false;
+    public bool crashSides = false;
+    public bool crashTopBot = false;
 
     public Animator cueAnim;
 
@@ -49,13 +54,14 @@ public class whiteBallMovement : MonoBehaviour
         forceNewton = mass / gravity;
         Mathf.Abs(forceNewton);
         roceForce =   uCoeficient * forceNewton;
+        vel = distanceSpeed * Time.deltaTime;
         camera = Camera.main;
         aux = (Vector2)(whiteBall.transform.position);
     }
 
     void Update()
     {
-        vel = distanceSpeed * Time.deltaTime;
+
 
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
@@ -63,73 +69,128 @@ public class whiteBallMovement : MonoBehaviour
         }
 
         aux = (Vector2)(whiteBall.transform.position);
+        vecResBallMouse = ((Vector2)transform.position + (directionTarget * (vel + restRoceForce(roceForce))));
 
         if (Input.GetKeyUp(KeyCode.Mouse0))
         {
 
             cueAnim.SetBool("IsOnCharge", false);
             MousePos = (Vector2)(camera.ScreenToWorldPoint(Input.mousePosition));
-            if (changeSideY == false)
-            {
-                directionTarget = (Vector2)(MousePos - transform.position);
-            }
+
+            directionTarget = (Vector2)(MousePos - transform.position);
             directionTarget.Normalize();
-           //if (changeSideX == false || changeSideY == false)
-            {
-                StartCoroutine(BallMovement(directionTarget));
-                StartCoroutine(DecreaseRoceForce(roceForce));
-            }
+
+            StartCoroutine(BallMovement(directionTarget,oppositeDirection));
+            StartCoroutine(DecreaseRoceForce(roceForce));
+
          
         }
         if (Input.GetKey(KeyCode.Mouse0) && distanceSpeed <= maxDistanceSpeed)
         {
             cueAnim.SetBool("IsOnCharge", true);
             distanceSpeed += 0.2f;
+            vel = distanceSpeed * Time.deltaTime;
         }
 
-        if ((this.transform.position.x - whiteBallRadius) <= leftCorner.transform.position.x || (this.transform.position.x + whiteBallRadius)  >= rightCorner.transform.position.x && !changeSideY)
+        if ((this.transform.position.x - whiteBallRadius) <= leftCorner.transform.position.x || (this.transform.position.x + whiteBallRadius)  >= rightCorner.transform.position.x)
         {
             Debug.Log("Chocó en los costados");
+            hasCrash = true;
+            doInerci = true;
+            crashSides = true;
             oppositeDirection.x = (invertVector *  directionTarget.x);
             oppositeDirection.y = (directionTarget.y);
 
-            transform.position += (oppositeDirection * (vel + restRoceForce(roceForce)));
+            if (doInerci)
+            {
+                StartCoroutine(DoInerciCorru(oppositeDirection));
+            }
 
-            //changeSideY = true;
         }
 
         if ((this.transform.position.y - whiteBallRadius) <= bottomCorner1.transform.position.y || (this.transform.position.y - whiteBallRadius) <= bottomCorner2.transform.position.y || (this.transform.position.y + whiteBallRadius) >= topCorner1.transform.position.y || (this.transform.position.y + whiteBallRadius) >= topCorner2.transform.position.y)
         {
             Debug.Log("Chocó arriba o abajo");
-
+            hasCrash = true;
+            doInerci = true;
+            crashTopBot = true;
             oppositeDirection.x = (directionTarget.x);
             oppositeDirection.y = (invertVector * directionTarget.y);
 
-            transform.position += (oppositeDirection * (vel + restRoceForce(roceForce)));
-
+            if (doInerci)
+            {
+                StartCoroutine(DoInerciCorru(oppositeDirection));
+            }
         }
-        
+
     }
 
-    IEnumerator BallMovement(Vector3 _direction)
+    //FUNCIONES Y CORRUTINAS
+
+    IEnumerator BallMovement(Vector3 _direction, Vector3 _OpositeDirection)
     {
         cueAnim.SetBool("IsOnDischarge", true);
 
         yield return new WaitForSeconds(0.25f);
 
         cue.gameObject.SetActive(false);
+        isMoving = true;
 
-        for (int i = 0; i < 25; i++)
+        while (isMoving == true && vel > 0 && !doInerci)
         {
-            transform.position += (_direction * (vel + (restRoceForce(roceForce))));
+           transform.position += (_direction * (vel));
 
-            if (i == 24)
+           vel = vel + (restRoceForce(roceForce) * 1.5f);
+
+           yield return new WaitForEndOfFrame();
+        }
+
+        if (vel < 0)
+        {
+            isMoving = false;
+        }
+
+        if (isMoving == false)
+        {
+            cueAnim.SetBool("IsOnDischarge", false);
+            cue.gameObject.SetActive(true);
+        }
+    }
+
+
+    IEnumerator DoInerciCorru(Vector3 _OpositeDirection)
+    {
+        while (doInerci)
+        {
+            transform.position += (_OpositeDirection * (vel));
+            vel = vel + (restRoceForce(roceForce) * 1.5f);
+
+            if (vel < 0)
+            {
+                doInerci = false;
+                isMoving = false;
+            }
+            if (isMoving == false)
             {
                 cueAnim.SetBool("IsOnDischarge", false);
                 cue.gameObject.SetActive(true);
             }
+
             yield return new WaitForEndOfFrame();
         }
+    }
+
+    void SwapBufferForVectors()
+    {
+
+        if (doInerci)
+        {
+            oppositeDirection2 = oppositeDirection;
+
+
+
+        }
+
 
     }
 
@@ -151,54 +212,4 @@ public class whiteBallMovement : MonoBehaviour
 
         return rForce;
     }
-
-    /*
-    IEnumerator BallMovementNegX(Vector3 _direction)
-    {
-        cueAnim.SetBool("IsOnDischarge", true);
-
-        Debug.Log("llegó");
-        yield return new WaitForSeconds(0.25f);
-
-        cue.gameObject.SetActive(false);
-
-        for (int i = 0; i < 25; i++)
-        {
-            transform.position += (_direction * (vel + (restRoceForce(roceForce))));
-            
-            if (i == 24)
-            {
-                cueAnim.SetBool("IsOnDischarge", false);
-                cue.gameObject.SetActive(true);
-            }
-            _direction.x = _direction.x * invertVector;
-            yield return new WaitForEndOfFrame();
-        }
-
-    }
-
-    IEnumerator BallMovementNegY(Vector3 _direction)
-    {
-        cueAnim.SetBool("IsOnDischarge", true);
-
-        Debug.Log("llegó");
-        yield return new WaitForSeconds(0.25f);
-
-        cue.gameObject.SetActive(false);
-
-        for (int i = 0; i < 25; i++)
-        {
-            transform.position += (_direction * (vel + (restRoceForce(roceForce))));
-
-            if (i == 24)
-            {
-                cueAnim.SetBool("IsOnDischarge", false);
-                cue.gameObject.SetActive(true);
-            }
-            _direction.y = _direction.y * invertVector;
-            yield return new WaitForEndOfFrame();
-        }
-
-    }
-    */
 }
