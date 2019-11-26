@@ -45,6 +45,8 @@ public class whiteBallMovement : MonoBehaviour
     public bool doInerci = false;
     public bool crashSides = false;
     public bool crashTopBot = false;
+    public bool firstImpact = false;
+    public bool othersImpact = false;
 
     public Animator cueAnim;
 
@@ -61,7 +63,12 @@ public class whiteBallMovement : MonoBehaviour
 
     void Update()
     {
-
+        if (vel <= 0)
+        {
+            doInerci = false;
+            firstImpact = false;
+            othersImpact = false;
+        }
 
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
@@ -92,18 +99,35 @@ public class whiteBallMovement : MonoBehaviour
             vel = distanceSpeed * Time.deltaTime;
         }
 
-        if ((this.transform.position.x - whiteBallRadius) <= leftCorner.transform.position.x || (this.transform.position.x + whiteBallRadius)  >= rightCorner.transform.position.x)
+        if ((this.transform.position.x - whiteBallRadius) <= leftCorner.transform.position.x || (this.transform.position.x + whiteBallRadius) >= rightCorner.transform.position.x)
         {
-            Debug.Log("Chocó en los costados");
-            hasCrash = true;
-            doInerci = true;
+            if (firstImpact)
+            {
+                othersImpact = true;
+            }
+            Debug.Log("Chocó en la Izquierda");
             crashSides = true;
-            oppositeDirection.x = (invertVector *  directionTarget.x);
-            oppositeDirection.y = (directionTarget.y);
+            if (!firstImpact)
+            {
+                oppositeDirection.x = (invertVector * directionTarget.x);
+                oppositeDirection.y = (directionTarget.y);
+                firstImpact = true;
+            }
+            if (firstImpact && othersImpact)
+            {
+                oppositeDirection.x = (invertVector * oppositeDirection.x);
+                oppositeDirection.y = (oppositeDirection.y);
+            }
+
+            doInerci = true;
 
             if (doInerci)
             {
                 StartCoroutine(DoInerciCorru(oppositeDirection));
+            }
+            else if (!doInerci)
+            {
+                StopCoroutine(DoInerciCorru(oppositeDirection));
             }
 
         }
@@ -111,15 +135,28 @@ public class whiteBallMovement : MonoBehaviour
         if ((this.transform.position.y - whiteBallRadius) <= bottomCorner1.transform.position.y || (this.transform.position.y - whiteBallRadius) <= bottomCorner2.transform.position.y || (this.transform.position.y + whiteBallRadius) >= topCorner1.transform.position.y || (this.transform.position.y + whiteBallRadius) >= topCorner2.transform.position.y)
         {
             Debug.Log("Chocó arriba o abajo");
-            hasCrash = true;
-            doInerci = true;
             crashTopBot = true;
-            oppositeDirection.x = (directionTarget.x);
-            oppositeDirection.y = (invertVector * directionTarget.y);
+
+            if (!doInerci)
+            {
+                oppositeDirection.x = (directionTarget.x);
+                oppositeDirection.y = (invertVector * directionTarget.y);
+            }
+            if (doInerci)
+            {
+                oppositeDirection.x = (directionTarget.x);
+                oppositeDirection.y = (invertVector * oppositeDirection.y);
+            }
+
+            doInerci = true;
 
             if (doInerci)
             {
                 StartCoroutine(DoInerciCorru(oppositeDirection));
+            }
+            else if (!doInerci)
+            {
+                StopCoroutine(DoInerciCorru(oppositeDirection));
             }
         }
 
@@ -147,6 +184,7 @@ public class whiteBallMovement : MonoBehaviour
 
         if (vel < 0)
         {
+            vel = 0.0f;
             isMoving = false;
         }
 
@@ -158,37 +196,61 @@ public class whiteBallMovement : MonoBehaviour
     }
 
 
-    IEnumerator DoInerciCorru(Vector3 _OpositeDirection)
+    IEnumerator DoInerciCorru(Vector3 _NewDirection)
     {
+        bool isOnOtherImpact = false;
+
         while (doInerci)
         {
-            transform.position += (_OpositeDirection * (vel));
-            vel = vel + (restRoceForce(roceForce) * 1.5f);
-
-            if (vel < 0)
+            if (firstImpact)
             {
-                doInerci = false;
-                isMoving = false;
-            }
-            if (isMoving == false)
-            {
-                cueAnim.SetBool("IsOnDischarge", false);
-                cue.gameObject.SetActive(true);
-            }
+                StopCoroutine(BallMovement(directionTarget,oppositeDirection));
 
-            yield return new WaitForEndOfFrame();
+                if (!isOnOtherImpact)
+                {
+                    transform.position += (_NewDirection * (vel));
+                    vel = vel + (restRoceForce(roceForce) * 1.5f);
+                }
+                if (vel > 0 && othersImpact)
+                {
+                    transform.position += (_NewDirection * (vel));
+                    vel = vel + (restRoceForce(roceForce) * 1.5f);
+                    isOnOtherImpact = true;
+                }
+                if (vel < 0)
+                {
+                    vel = 0.0f;
+
+                    doInerci = false;
+                    isMoving = false;
+                    isOnOtherImpact = false;
+                }
+                if (isMoving == false)
+                {
+                    cueAnim.SetBool("IsOnDischarge", false);
+                    cue.gameObject.SetActive(true);
+                }
+                yield return new WaitForEndOfFrame();
+            }
+            
         }
     }
 
     void SwapBufferForVectors()
     {
-
         if (doInerci)
         {
-            oppositeDirection2 = oppositeDirection;
+            oppositeDirection2 = (Vector2)((Vector2)transform.position - (Vector2)oppositeDirection);
+            oppositeDirection2.Normalize();
 
-
-
+            if (crashSides)
+            {
+                oppositeDirection2 = new Vector2((oppositeDirection2.x) * invertVector, oppositeDirection2.y);
+            }
+            else if (crashTopBot)
+            {
+                oppositeDirection2 = new Vector2(oppositeDirection2.x, (oppositeDirection2.y) * invertVector);
+            }
         }
 
 
