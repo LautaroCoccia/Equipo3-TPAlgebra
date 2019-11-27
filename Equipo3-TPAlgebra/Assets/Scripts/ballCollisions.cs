@@ -74,33 +74,33 @@ public class ballCollisions : MonoBehaviour
 
 
 
-       /*
-        for (int i = 0; i < wallsCant; i++)
-        {
-            pointWall = new Vector2(wallPoint[i].transform.position.x, wallPoint[i].transform.position.y);
+        /*
+         for (int i = 0; i < wallsCant; i++)
+         {
+             pointWall = new Vector2(wallPoint[i].transform.position.x, wallPoint[i].transform.position.y);
 
-            pointWall.x = whiteBall.gameObject.transform.position.x;
+             pointWall.x = whiteBall.gameObject.transform.position.x;
 
-            if (pointWall.x < walls[i].transform.position.x) pointWall.x = walls[i].transform.position.x;
-            if (pointWall.x > walls[i].transform.position.x + walls[i].transform.localScale.x) pointWall.x = walls[i].transform.position.x + walls[i].transform.localScale.x;
+             if (pointWall.x < walls[i].transform.position.x) pointWall.x = walls[i].transform.position.x;
+             if (pointWall.x > walls[i].transform.position.x + walls[i].transform.localScale.x) pointWall.x = walls[i].transform.position.x + walls[i].transform.localScale.x;
 
-            pointWall.y = whiteBall.gameObject.transform.position.y;
+             pointWall.y = whiteBall.gameObject.transform.position.y;
 
-            if (pointWall.y < walls[i].transform.position.y) pointWall.y = walls[i].transform.position.y;
-            if (pointWall.y > walls[i].transform.position.y + walls[i].transform.localScale.y) pointWall.y = walls[i].transform.position.y + walls[i].transform.localScale.y;
+             if (pointWall.y < walls[i].transform.position.y) pointWall.y = walls[i].transform.position.y;
+             if (pointWall.y > walls[i].transform.position.y + walls[i].transform.localScale.y) pointWall.y = walls[i].transform.position.y + walls[i].transform.localScale.y;
 
-            distanciasWalls[i] = Mathf.Sqrt(Mathf.Pow(whiteBall.transform.position.x - pointWall.x, 2) + Mathf.Pow(whiteBall.transform.position.y - pointWall.y, 2));
-        }
+             distanciasWalls[i] = Mathf.Sqrt(Mathf.Pow(whiteBall.transform.position.x - pointWall.x, 2) + Mathf.Pow(whiteBall.transform.position.y - pointWall.y, 2));
+         }
 
-        if (distanciasWalls[0] < whiteBallRad.whiteBallRadius)
-        {
-            Debug.Log("La bola blanca colisiono con la pared Izquierda...");
-        }
-        else if (distanciasWalls[1] < whiteBallRad.whiteBallRadius)
-        {
-            Debug.Log("La bola blanca colisiono con la pared Derecha...");
-        }
-        */
+         if (distanciasWalls[0] < whiteBallRad.whiteBallRadius)
+         {
+             Debug.Log("La bola blanca colisiono con la pared Izquierda...");
+         }
+         else if (distanciasWalls[1] < whiteBallRad.whiteBallRadius)
+         {
+             Debug.Log("La bola blanca colisiono con la pared Derecha...");
+         }
+         */
     }
 
     /*
