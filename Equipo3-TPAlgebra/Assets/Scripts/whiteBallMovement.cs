@@ -50,6 +50,8 @@ public class whiteBallMovement : MonoBehaviour
 
     public Animator cueAnim;
 
+    public bool colision = false;
+
     //Functions
     private void Start()
     {
@@ -99,7 +101,44 @@ public class whiteBallMovement : MonoBehaviour
             vel = distanceSpeed * Time.deltaTime;
         }
 
-        if ((this.transform.position.x - whiteBallRadius) <= leftCorner.transform.position.x || (this.transform.position.x + whiteBallRadius) >= rightCorner.transform.position.x)
+        
+
+
+        if ((this.transform.position.x + whiteBallRadius) >= rightCorner.transform.position.x)
+        {
+             if (firstImpact)
+            {
+                othersImpact = true;
+            }
+            Debug.Log("Chocó en la Izquierda");
+            crashSides = true;
+            if (!firstImpact)
+            {
+                oppositeDirection.x = (invertVector * directionTarget.x);
+                oppositeDirection.y = (directionTarget.y);
+                firstImpact = true;
+            }
+            if (firstImpact && othersImpact)
+            {
+                oppositeDirection.x = (invertVector * oppositeDirection.x);
+            }
+
+            doInerci = true;
+
+            if (doInerci)
+            {
+                StartCoroutine(DoInerciCorru(oppositeDirection));
+            }
+            else if (!doInerci)
+            {
+                StopCoroutine(DoInerciCorru(oppositeDirection));
+            }
+            
+
+        }
+
+
+        if ((this.transform.position.x - whiteBallRadius) <= leftCorner.transform.position.x) 
         {
             if (firstImpact)
             {
@@ -116,7 +155,6 @@ public class whiteBallMovement : MonoBehaviour
             if (firstImpact && othersImpact)
             {
                 oppositeDirection.x = (invertVector * oppositeDirection.x);
-                oppositeDirection.y = (oppositeDirection.y);
             }
 
             doInerci = true;
@@ -132,19 +170,48 @@ public class whiteBallMovement : MonoBehaviour
 
         }
 
-        if ((this.transform.position.y - whiteBallRadius) <= bottomCorner1.transform.position.y || (this.transform.position.y - whiteBallRadius) <= bottomCorner2.transform.position.y || (this.transform.position.y + whiteBallRadius) >= topCorner1.transform.position.y || (this.transform.position.y + whiteBallRadius) >= topCorner2.transform.position.y)
+        if (( this.transform.position.y - whiteBallRadius) <= bottomCorner1.transform.position.y || (this.transform.position.y - whiteBallRadius) <= bottomCorner2.transform.position.y  )
         {
             Debug.Log("Chocó arriba o abajo");
-            crashTopBot = true;
+            //crashTopBot = true;
 
-            if (!doInerci)
+            //if (!doInerci)
+            //{
+            //    oppositeDirection.x = (directionTarget.x);
+            //    oppositeDirection.y = (invertVector * directionTarget.y);
+            //}
+            //if (doInerci)
+            //{
+            //    oppositeDirection.x = (directionTarget.x);
+            //    oppositeDirection.y = (invertVector * oppositeDirection.y);
+            //}
+
+            //doInerci = true;
+
+            //if (doInerci)
+            //{
+            //    StartCoroutine(DoInerciCorru(oppositeDirection));
+            //}
+            //else if (!doInerci)
+            //{
+            //    StopCoroutine(DoInerciCorru(oppositeDirection));
+            //}
+
+            //facu aca es donde se cuelga 
+
+            if (firstImpact)
             {
-                oppositeDirection.x = (directionTarget.x);
-                oppositeDirection.y = (invertVector * directionTarget.y);
+                othersImpact = true;
             }
-            if (doInerci)
+            Debug.Log("Chocó abajo");
+            crashTopBot = true;
+            if (!firstImpact)
             {
-                oppositeDirection.x = (directionTarget.x);
+                oppositeDirection.y = (invertVector * directionTarget.y);
+                firstImpact = true;
+            }
+            if (firstImpact && othersImpact)
+            {
                 oppositeDirection.y = (invertVector * oppositeDirection.y);
             }
 
@@ -159,7 +226,35 @@ public class whiteBallMovement : MonoBehaviour
                 StopCoroutine(DoInerciCorru(oppositeDirection));
             }
         }
+        if (( this.transform.position.y + whiteBallRadius) >= topCorner1.transform.position.y || (this.transform.position.y + whiteBallRadius) >= topCorner2.transform.position.y)
+        {
+            if (firstImpact)
+            {
+                othersImpact = true;
+            }
+            Debug.Log("Chocó arriba");
+            crashTopBot = true;
+            if (!firstImpact)
+            {
+                oppositeDirection.y = (invertVector * directionTarget.y);
+                firstImpact = true;
+            }
+            if (firstImpact && othersImpact)
+            {
+                oppositeDirection.y = (invertVector * oppositeDirection.y);
+            }
 
+            doInerci = true;
+
+            if (doInerci)
+            {
+                StartCoroutine(DoInerciCorru(oppositeDirection));
+            }
+            else if (!doInerci)
+            {
+                StopCoroutine(DoInerciCorru(oppositeDirection));
+            }
+        }
     }
 
     //FUNCIONES Y CORRUTINAS
@@ -274,4 +369,6 @@ public class whiteBallMovement : MonoBehaviour
 
         return rForce;
     }
+    
+
 }
