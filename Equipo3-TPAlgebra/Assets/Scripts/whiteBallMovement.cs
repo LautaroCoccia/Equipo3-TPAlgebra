@@ -34,17 +34,12 @@ public class whiteBallMovement : MonoBehaviour
     public Vector3 MousePos;
     public Vector2 directionTarget;
     public Vector3 oppositeDirection;
-    public Vector3 oppositeDirection2;
     public float invertVector = -1;
     Vector2 aux = new Vector2();
     Vector2 vecResBallMouse = new Vector2();
 
     float maxDistanceSpeed = 100.0f;
-    public bool hasCrash = false;
     public bool isMoving = false;
-    public bool doInerci = false;
-    public bool crashSides = false;
-    public bool crashTopBot = false;
     public bool firstImpact = false;
     public bool othersImpact = false;
 
@@ -83,7 +78,7 @@ public class whiteBallMovement : MonoBehaviour
             directionTarget = (Vector2)(MousePos - transform.position);
             directionTarget.Normalize();
 
-            StartCoroutine(BallMovement(directionTarget,oppositeDirection));
+            StartCoroutine(BallMovement(directionTarget));
             StartCoroutine(DecreaseRoceForce(roceForce));
 
          
@@ -95,21 +90,16 @@ public class whiteBallMovement : MonoBehaviour
             vel = distanceSpeed * Time.deltaTime;
         }
 
-        //if (this.transform.position.x + gameObject. >= )
-        //{
-        //
-        //}
+      
     }
 
    
     //INVESTIGAR SINGLETONE Y UTILIZACION DE GIZMOS E INVOKE
     // private void OnDrawGizmos()
 
-        
-
     //FUNCIONES Y CORRUTINAS
 
-    IEnumerator BallMovement(Vector3 _direction, Vector3 _OpositeDirection)
+    IEnumerator BallMovement(Vector3 _direction)
     {
         cueAnim.SetBool("IsOnDischarge", true);
 
