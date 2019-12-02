@@ -2737,10 +2737,12 @@ MonoBehaviour:
   directionTarget: {x: 0, y: 0}
   oppositeDirection: {x: 0, y: 0, z: 0}
   invertVector: -1
+  aux: {x: 0, y: 0}
   isMoving: 0
   firstImpact: 0
   othersImpact: 0
   cueAnim: {fileID: 102606353}
+  ballColl: {fileID: 1929959556}
   colision: 0
 --- !u!114 &1929959556
 MonoBehaviour:

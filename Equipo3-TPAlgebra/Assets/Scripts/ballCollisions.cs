@@ -49,7 +49,7 @@ public class ballCollisions : MonoBehaviour
         }
     }
 
-    void CalcCollisionWalls()
+    public void CalcCollisionWalls()
     {
         for (int i = 0; i < walls.Length; i++)
         {
@@ -57,32 +57,41 @@ public class ballCollisions : MonoBehaviour
             {
                 case Wall.ColliderEdge.BOTTOM:
                     if (whiteBall.transform.position.y + whiteBallPropieties.whiteBallRadius <= (walls[i].transform.position.y))
-                    {
+                    {                    
                         whiteBallPropieties.directionTarget = new Vector2(whiteBallPropieties.directionTarget.x, (whiteBallPropieties.directionTarget.y * (whiteBallPropieties.invertVector)));
+                        whiteBallPropieties.transform.position = new Vector2(whiteBallPropieties.aux.x, whiteBallPropieties.aux.y + whiteBallPropieties.whiteBallRadius);
+                        whiteBallPropieties.vel = whiteBallPropieties.vel / 1.5f;                   
                     }
                     break;
                 case Wall.ColliderEdge.UP:
                     if (whiteBall.transform.position.y + whiteBallPropieties.whiteBallRadius >= (walls[i].transform.position.y))
                     {
                         whiteBallPropieties.directionTarget = new Vector2(whiteBallPropieties.directionTarget.x, (whiteBallPropieties.directionTarget.y * (whiteBallPropieties.invertVector)));
+                        whiteBallPropieties.transform.position = new Vector2(whiteBallPropieties.aux.x, whiteBallPropieties.aux.y - whiteBallPropieties.whiteBallRadius);
+                        whiteBallPropieties.vel = whiteBallPropieties.vel / 1.5f;
+
                     }
                     break;
                 case Wall.ColliderEdge.RIGHT:
                     if (whiteBall.transform.position.x + whiteBallPropieties.whiteBallRadius >= (walls[i].transform.position.x))
                     {
-                        
                         whiteBallPropieties.directionTarget = new Vector2((whiteBallPropieties.directionTarget.x * (whiteBallPropieties.invertVector)), whiteBallPropieties.directionTarget.y);
+                        whiteBallPropieties.transform.position = new Vector2(whiteBallPropieties.aux.x - whiteBallPropieties.whiteBallRadius, whiteBallPropieties.aux.y);
+                        whiteBallPropieties.vel = whiteBallPropieties.vel / 1.5f;
+
                     }
                     break;
                 case Wall.ColliderEdge.LEFT:
                     if ((whiteBall.transform.position.x + whiteBallPropieties.whiteBallRadius) <= (walls[i].transform.position.x))
                     {
-                        whiteBallPropieties.directionTarget = new Vector2((whiteBallPropieties.directionTarget.x * (whiteBallPropieties.invertVector)), whiteBallPropieties.directionTarget.y);
+                        whiteBallPropieties.directionTarget = new Vector2((whiteBallPropieties.directionTarget.x * (whiteBallPropieties.invertVector)), whiteBallPropieties.directionTarget.y);                  
+                        whiteBallPropieties.transform.position = new Vector2(whiteBallPropieties.aux.x + whiteBallPropieties.whiteBallRadius, whiteBallPropieties.aux.y);              
+                        whiteBallPropieties.vel = whiteBallPropieties.vel / 1.5f;
+
                     }
                     break;
             }
         }
-
 
     }
 

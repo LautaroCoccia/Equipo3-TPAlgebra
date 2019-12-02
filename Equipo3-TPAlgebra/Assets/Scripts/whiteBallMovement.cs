@@ -35,7 +35,7 @@ public class whiteBallMovement : MonoBehaviour
     public Vector2 directionTarget;
     public Vector3 oppositeDirection;
     public float invertVector = -1;
-    Vector2 aux = new Vector2();
+    public Vector2 aux = new Vector2();
     Vector2 vecResBallMouse = new Vector2();
 
     float maxDistanceSpeed = 100.0f;
@@ -44,6 +44,7 @@ public class whiteBallMovement : MonoBehaviour
     public bool othersImpact = false;
 
     public Animator cueAnim;
+    public ballCollisions ballColl;
 
     public bool colision = false;
 
@@ -52,7 +53,7 @@ public class whiteBallMovement : MonoBehaviour
     {
         forceNewton = mass / gravity;
         Mathf.Abs(forceNewton);
-        roceForce =   uCoeficient * forceNewton;
+        roceForce = uCoeficient * forceNewton;
         vel = distanceSpeed * Time.deltaTime;
         camera = Camera.main;
         aux = (Vector2)(whiteBall.transform.position);
@@ -65,8 +66,7 @@ public class whiteBallMovement : MonoBehaviour
         {
             distanceSpeed = 1.0f;
         }
-
-        aux = (Vector2)(whiteBall.transform.position);
+   
         vecResBallMouse = ((Vector2)transform.position + (directionTarget * (vel + restRoceForce(roceForce))));
 
         if (Input.GetKeyUp(KeyCode.Mouse0))
@@ -78,10 +78,10 @@ public class whiteBallMovement : MonoBehaviour
             directionTarget = (Vector2)(MousePos - transform.position);
             directionTarget.Normalize();
 
-            StartCoroutine(BallMovement(directionTarget));
+            StartCoroutine(BallMovement());
             StartCoroutine(DecreaseRoceForce(roceForce));
 
-         
+
         }
         if (Input.GetKey(KeyCode.Mouse0) && distanceSpeed <= maxDistanceSpeed)
         {
@@ -90,16 +90,16 @@ public class whiteBallMovement : MonoBehaviour
             vel = distanceSpeed * Time.deltaTime;
         }
 
-      
+
     }
 
-   
+
     //INVESTIGAR SINGLETONE Y UTILIZACION DE GIZMOS E INVOKE
     // private void OnDrawGizmos()
 
     //FUNCIONES Y CORRUTINAS
 
-    IEnumerator BallMovement(Vector3 _direction)
+    IEnumerator BallMovement()
     {
         cueAnim.SetBool("IsOnDischarge", true);
 
@@ -110,19 +110,18 @@ public class whiteBallMovement : MonoBehaviour
 
         while (isMoving == true && vel > 0)
         {
-           transform.position += (_direction * (vel));
+            aux = (Vector2)(whiteBall.transform.position);
+            ballColl.CalcCollisionWalls();
+            transform.position += (Vector3)((directionTarget * (vel)));
+            vel = vel + (restRoceForce(roceForce) * 1.5f);
 
-           vel = vel + (restRoceForce(roceForce) * 1.5f);
-
-           yield return new WaitForEndOfFrame();
+            yield return new WaitForEndOfFrame();
         }
-
         if (vel < 0)
         {
             vel = 0.0f;
             isMoving = false;
         }
-
         if (isMoving == false)
         {
             cueAnim.SetBool("IsOnDischarge", false);
@@ -132,7 +131,7 @@ public class whiteBallMovement : MonoBehaviour
 
     IEnumerator DecreaseRoceForce(float roceForce)
     {
-       while(roceForce > 0)
+        while (roceForce > 0)
         {
             restRoceForce(roceForce);
             yield return new WaitForSeconds(0.5f);
@@ -142,9 +141,7 @@ public class whiteBallMovement : MonoBehaviour
 
     float restRoceForce(float roceForce)
     {
-        float rForce = 0;
-
-        rForce = roceForce * (Mathf.Pow(Time.deltaTime,2));
+        float rForce = roceForce * (Mathf.Pow(Time.deltaTime, 2));
 
         return rForce;
     }
