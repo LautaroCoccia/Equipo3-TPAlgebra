@@ -8,7 +8,8 @@ public class ballCollisions : MonoBehaviour
 
     public GameObject whiteBall;
     public GameObject[] corners;
-    public GameObject[] balls;
+    private GameObject[] balls;
+    public makeTriangle makeTriangle;
     public Wall[] walls;
 
     public radiusOtherBalls ballsRads;
@@ -21,18 +22,25 @@ public class ballCollisions : MonoBehaviour
     public float[] distanciasWalls = new float[wallsCant];
     private float allCornerRadius;
     bool hasCrash = false;
+    float distance;
 
     Vector2 pointWall;
+
+    private void Start()
+    {
+        balls = makeTriangle.balls;
+    }
 
     void FixedUpdate()
     {
         allCornerRadius = ballsRads.otherBallRadius;
+    
+        calcCollisionBalls();
 
         CalcCollisionCorners();
 
         CalcCollisionWalls();
 
-        //calcCollisionBalls();
     }
 
     void CalcCollisionCorners()
@@ -95,16 +103,21 @@ public class ballCollisions : MonoBehaviour
 
     }
 
-    /*
     void calcCollisionBalls()
     {
-        distancias = Mathf.Sqrt(Mathf.Pow((whiteBall.transform.position.x - balls[0].transform.position.x), 2) + Mathf.Pow((whiteBall.transform.position.y - balls[0].transform.position.y), 2));
-
-        if (distancias < (ballsRads.otherBallRadius + whiteBallRad.whiteBallRadius))
+        for (int i = 1; i < balls.Length; i++)
         {
-            Debug.Log("La Bola blanca impacto con otra bola....");
-        }
+            distance = Mathf.Sqrt(Mathf.Pow((whiteBall.transform.position.x - balls[i].transform.position.x), 2) + Mathf.Pow((whiteBall.transform.position.y - balls[i].transform.position.y), 2));
 
+            if (distance < (ballsRads.otherBallRadius + whiteBallPropieties.whiteBallRadius))
+            {
+                Debug.Log("La Bola blanca impacto con otra bola....");
+            }
+            else
+            {
+                //Debug.Log("No colisiona");
+            }
+        }
     }
-    */
+    
 }

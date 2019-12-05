@@ -23,7 +23,7 @@ public class radiusOtherBalls : MonoBehaviour
         calcRad();
     }
 
-    void calcRad()
+    public void calcRad()
     {
 
         otherBallX = otherBall.gameObject.transform.position.x;
@@ -34,7 +34,6 @@ public class radiusOtherBalls : MonoBehaviour
         otherBallRadius = (otherBallX + otherBallY) - (pointExtremeX + pointExtremeY);
 
         otherBallRadius = Mathf.Abs(otherBallRadius);
-
     }
 
 }

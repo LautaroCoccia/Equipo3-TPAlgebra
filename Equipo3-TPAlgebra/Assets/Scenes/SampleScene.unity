@@ -1681,7 +1681,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &808643845
 Transform:
   m_ObjectHideFlags: 0
@@ -1718,7 +1718,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 808643844}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 07a3d5c4420ff1941852abcc75404533, type: 3}
   m_Name: 
@@ -1741,6 +1741,7 @@ MonoBehaviour:
   - {fileID: 6868710239687237645}
   - {fileID: 7698076398594251433}
   - {fileID: 5861389993404827345}
+  RadiusOtherBalls: {fileID: 0}
   ballRadius: 2.555
 --- !u!1 &960031149
 GameObject:
@@ -2726,6 +2727,7 @@ MonoBehaviour:
   bottomCorner1: {fileID: 697517756}
   topCorner2: {fileID: 1468163889}
   bottomCorner2: {fileID: 1143339025}
+  RadiusOtherBalls: {fileID: 0}
   camera: {fileID: 519420031}
   whiteBallRadius: 0
   mass: 100
@@ -2764,7 +2766,7 @@ MonoBehaviour:
   - {fileID: 385710297}
   - {fileID: 764604869}
   - {fileID: 138787215}
-  balls: []
+  makeTriangle: {fileID: 808643846}
   walls:
   - {fileID: 473924916}
   - {fileID: 299397428}
@@ -3007,6 +3009,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Red_11_RAYBall
       objectReference: {fileID: 0}
+    - target: {fileID: 3222814403220058775, guid: 44ed7be19925f9a4c90c0bad8b5ee0fc,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6637770307937870084, guid: 44ed7be19925f9a4c90c0bad8b5ee0fc,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3091,6 +3098,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Blue_2_Ball
+      objectReference: {fileID: 0}
+    - target: {fileID: 1850144023488897534, guid: 35f0eabcefbb1024c91b94113d3b9ee4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1273765909610783091, guid: 35f0eabcefbb1024c91b94113d3b9ee4,
         type: 3}
@@ -3271,6 +3283,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Violet_12_RAYBall
       objectReference: {fileID: 0}
+    - target: {fileID: 7793593377491943238, guid: a037b7e735023184d90133f6b561b645,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8981328699440952896, guid: a037b7e735023184d90133f6b561b645,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3354,6 +3371,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: RedDark_7_Ball
+      objectReference: {fileID: 0}
+    - target: {fileID: 8827756570548444678, guid: d5c530b329903754f88f51995b4888b9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5584166952265995635, guid: d5c530b329903754f88f51995b4888b9,
         type: 3}
@@ -3440,8 +3462,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2caaccb8d02c17428176e941ae8add1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  otherBall: {fileID: 0}
-  pointExtreme: {fileID: 0}
+  otherBall: {fileID: 808643844}
+  pointExtreme: {fileID: 211832927}
   otherBallX: 0
   otherBallY: 0
   pointExtremeX: 0
@@ -3483,8 +3505,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2caaccb8d02c17428176e941ae8add1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  otherBall: {fileID: 0}
-  pointExtreme: {fileID: 0}
+  otherBall: {fileID: 808643844}
+  pointExtreme: {fileID: 1165307820}
   otherBallX: 0
   otherBallY: 0
   pointExtremeX: 0
@@ -3508,8 +3530,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2caaccb8d02c17428176e941ae8add1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  otherBall: {fileID: 0}
-  pointExtreme: {fileID: 0}
+  otherBall: {fileID: 808643844}
+  pointExtreme: {fileID: 960031149}
   otherBallX: 0
   otherBallY: 0
   pointExtremeX: 0
@@ -3526,6 +3548,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: RedDark_15_RAYBall
+      objectReference: {fileID: 0}
+    - target: {fileID: 5861389993404827345, guid: 5f1ff8509c8f06045801822e05c35c6b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 478580451643858667, guid: 5f1ff8509c8f06045801822e05c35c6b,
         type: 3}
@@ -3605,6 +3632,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Black_8_Ball
+      objectReference: {fileID: 0}
+    - target: {fileID: 8614715242156516955, guid: 761d5afaaee78b24a86fb1a83e0bb83e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7240640437146640277, guid: 761d5afaaee78b24a86fb1a83e0bb83e,
         type: 3}
@@ -3696,8 +3728,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2caaccb8d02c17428176e941ae8add1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  otherBall: {fileID: 0}
-  pointExtreme: {fileID: 0}
+  otherBall: {fileID: 808643844}
+  pointExtreme: {fileID: 708255485}
   otherBallX: 0
   otherBallY: 0
   pointExtremeX: 0
@@ -3721,8 +3753,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2caaccb8d02c17428176e941ae8add1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  otherBall: {fileID: 0}
-  pointExtreme: {fileID: 0}
+  otherBall: {fileID: 808643844}
+  pointExtreme: {fileID: 49214993}
   otherBallX: 0
   otherBallY: 0
   pointExtremeX: 0
@@ -3745,6 +3777,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Green_6_Ball
+      objectReference: {fileID: 0}
+    - target: {fileID: 5399013745042303313, guid: aa20387745e19fa48a76f77a2165d96f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8348182913265883951, guid: aa20387745e19fa48a76f77a2165d96f,
         type: 3}
@@ -3836,8 +3873,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2caaccb8d02c17428176e941ae8add1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  otherBall: {fileID: 0}
-  pointExtreme: {fileID: 0}
+  otherBall: {fileID: 808643844}
+  pointExtreme: {fileID: 546592423}
   otherBallX: 0
   otherBallY: 0
   pointExtremeX: 0
@@ -3854,6 +3891,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Violet_4_Ball
+      objectReference: {fileID: 0}
+    - target: {fileID: 6015621139126047544, guid: 5568474ee85e2aa40958beb0962d7024,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5058039510943248644, guid: 5568474ee85e2aa40958beb0962d7024,
         type: 3}
@@ -3946,6 +3988,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Orange_5_Ball
       objectReference: {fileID: 0}
+    - target: {fileID: 3130366181253335301, guid: b0b6a024cd94e46438007410b83b1ee6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2588548770482691588, guid: b0b6a024cd94e46438007410b83b1ee6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4031,8 +4078,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2caaccb8d02c17428176e941ae8add1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  otherBall: {fileID: 0}
-  pointExtreme: {fileID: 0}
+  otherBall: {fileID: 808643844}
+  pointExtreme: {fileID: 1985618305}
   otherBallX: 0
   otherBallY: 0
   pointExtremeX: 0
@@ -4056,8 +4103,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2caaccb8d02c17428176e941ae8add1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  otherBall: {fileID: 0}
-  pointExtreme: {fileID: 0}
+  otherBall: {fileID: 808643844}
+  pointExtreme: {fileID: 189045422}
   otherBallX: 0
   otherBallY: 0
   pointExtremeX: 0
@@ -4081,8 +4128,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2caaccb8d02c17428176e941ae8add1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  otherBall: {fileID: 0}
-  pointExtreme: {fileID: 0}
+  otherBall: {fileID: 808643844}
+  pointExtreme: {fileID: 387620193}
   otherBallX: 0
   otherBallY: 0
   pointExtremeX: 0
@@ -4112,8 +4159,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2caaccb8d02c17428176e941ae8add1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  otherBall: {fileID: 0}
-  pointExtreme: {fileID: 0}
+  otherBall: {fileID: 808643844}
+  pointExtreme: {fileID: 1774775598}
   otherBallX: 0
   otherBallY: 0
   pointExtremeX: 0
@@ -4130,6 +4177,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Green_14_RAYBall
+      objectReference: {fileID: 0}
+    - target: {fileID: 7698076398594251433, guid: 1d97646a009e5444fb7eca92e57fc8db,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5510605717153949041, guid: 1d97646a009e5444fb7eca92e57fc8db,
         type: 3}
@@ -4222,6 +4274,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Yellow_1_ball
       objectReference: {fileID: 0}
+    - target: {fileID: 4232386672042478359, guid: 8daf6df71ea745045aee9c081b1d3753,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2795668938998560458, guid: 8daf6df71ea745045aee9c081b1d3753,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4292,6 +4349,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6617280599968321019, guid: 8daf6df71ea745045aee9c081b1d3753,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8daf6df71ea745045aee9c081b1d3753, type: 3}
 --- !u!1 &7576343553187086625 stripped
@@ -4312,8 +4374,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2caaccb8d02c17428176e941ae8add1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  otherBall: {fileID: 0}
-  pointExtreme: {fileID: 0}
+  otherBall: {fileID: 808643844}
+  pointExtreme: {fileID: 663311919}
   otherBallX: 0
   otherBallY: 0
   pointExtremeX: 0
@@ -4330,6 +4392,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Red_3_Ball
+      objectReference: {fileID: 0}
+    - target: {fileID: 7576343553187086625, guid: 776f0acc354a86f4b9a88cff5971a2d7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2404188863856721376, guid: 776f0acc354a86f4b9a88cff5971a2d7,
         type: 3}
@@ -4416,8 +4483,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2caaccb8d02c17428176e941ae8add1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  otherBall: {fileID: 0}
-  pointExtreme: {fileID: 0}
+  otherBall: {fileID: 808643844}
+  pointExtreme: {fileID: 106512976}
   otherBallX: 0
   otherBallY: 0
   pointExtremeX: 0
@@ -4447,8 +4514,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2caaccb8d02c17428176e941ae8add1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  otherBall: {fileID: 0}
-  pointExtreme: {fileID: 0}
+  otherBall: {fileID: 808643844}
+  pointExtreme: {fileID: 1786909526}
   otherBallX: 0
   otherBallY: 0
   pointExtremeX: 0
@@ -4471,6 +4538,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: YellowRAY_9_Ball
+      objectReference: {fileID: 0}
+    - target: {fileID: 6032672862676786197, guid: 3961a0a40fe50f242a3f2c690e14921a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7094075714088513971, guid: 3961a0a40fe50f242a3f2c690e14921a,
         type: 3}
@@ -4557,8 +4629,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2caaccb8d02c17428176e941ae8add1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  otherBall: {fileID: 0}
-  pointExtreme: {fileID: 0}
+  otherBall: {fileID: 808643844}
+  pointExtreme: {fileID: 1238181704}
   otherBallX: 0
   otherBallY: 0
   pointExtremeX: 0
@@ -4575,6 +4647,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Orange_13_RAYBall
+      objectReference: {fileID: 0}
+    - target: {fileID: 6868710239687237645, guid: 55ede24f49b20ca4fbf9d5555d97a8fe,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8755828120827306181, guid: 55ede24f49b20ca4fbf9d5555d97a8fe,
         type: 3}
@@ -4667,8 +4744,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2caaccb8d02c17428176e941ae8add1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  otherBall: {fileID: 0}
-  pointExtreme: {fileID: 0}
+  otherBall: {fileID: 808643844}
+  pointExtreme: {fileID: 1551757371}
   otherBallX: 0
   otherBallY: 0
   pointExtremeX: 0
@@ -4685,6 +4762,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Blue_10_RAYBall
+      objectReference: {fileID: 0}
+    - target: {fileID: 4132927261038531221, guid: 2871bb59b663f4943812264e5c7feb62,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7786925145725405917, guid: 2871bb59b663f4943812264e5c7feb62,
         type: 3}

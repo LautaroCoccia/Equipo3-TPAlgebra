@@ -14,6 +14,8 @@ public class whiteBallMovement : MonoBehaviour
     public GameObject bottomCorner1;
     public GameObject topCorner2;
     public GameObject bottomCorner2;
+    public radiusOtherBalls RadiusOtherBalls;
+
     public Camera camera;
 
     //Vriables
@@ -89,6 +91,7 @@ public class whiteBallMovement : MonoBehaviour
             distanceSpeed += 0.2f;
             vel = distanceSpeed * Time.deltaTime;
         }
+        
 
 
     }
