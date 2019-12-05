@@ -71,7 +71,7 @@ public class whiteBallMovement : MonoBehaviour
    
         vecResBallMouse = ((Vector2)transform.position + (directionTarget * (vel + restRoceForce(roceForce))));
 
-        if (Input.GetKeyUp(KeyCode.Mouse0))
+        if (Input.GetKeyUp(KeyCode.Mouse0) && isMoving == false;)
         {
 
             cueAnim.SetBool("IsOnCharge", false);
@@ -85,15 +85,12 @@ public class whiteBallMovement : MonoBehaviour
 
 
         }
-        if (Input.GetKey(KeyCode.Mouse0) && distanceSpeed <= maxDistanceSpeed)
+        if (Input.GetKey(KeyCode.Mouse0) && distanceSpeed <= maxDistanceSpeed && isMoving == false)
         {
             cueAnim.SetBool("IsOnCharge", true);
             distanceSpeed += 0.2f;
             vel = distanceSpeed * Time.deltaTime;
         }
-        
-
-
     }
 
 
