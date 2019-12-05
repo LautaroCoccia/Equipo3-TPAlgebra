@@ -88,7 +88,7 @@ public class whiteBallMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.Mouse0) && distanceSpeed <= maxDistanceSpeed && isMoving == false)
         {
             cueAnim.SetBool("IsOnCharge", true);
-            distanceSpeed += 0.2f;
+            distanceSpeed += 0.2f;          
             vel = distanceSpeed * Time.deltaTime;
         }
     }
@@ -111,7 +111,6 @@ public class whiteBallMovement : MonoBehaviour
         while (isMoving == true && vel > 0)
         {
             aux = (Vector2)(whiteBall.transform.position);
-            ballColl.CalcCollisionWalls();
             transform.position += (Vector3)((directionTarget * (vel)));
             vel = vel + (restRoceForce(roceForce) * 1.5f);
 

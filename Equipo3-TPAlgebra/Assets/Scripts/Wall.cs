@@ -13,5 +13,6 @@ public class Wall : MonoBehaviour
     }
 
     public ColliderEdge colliderEdge;
- 
+    public float wallWidth;
+    public float wallHeight;
 }

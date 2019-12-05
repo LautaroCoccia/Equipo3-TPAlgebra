@@ -34,11 +34,17 @@ public class ballCollisions : MonoBehaviour
 
     void FixedUpdate()
     {
-        calcCollisionBalls();
+        if (whiteBallPropieties.vel > 0)
+        {
 
-        CalcCollisionCorners();
-
-        CalcCollisionWalls();
+            calcCollisionBalls();
+            CalcCollisionCorners();
+            CalcCollisionWalls();
+        }
+        else if (whiteBallPropieties.vel <= 0)
+        {
+            resetBallPos();
+        }
     }
 
     void CalcCollisionCorners()
@@ -63,17 +69,17 @@ public class ballCollisions : MonoBehaviour
             {
                 case Wall.ColliderEdge.BOTTOM:
                     if (whiteBall.transform.position.y + whiteBallPropieties.whiteBallRadius <= (walls[i].transform.position.y))
-                    {                    
+                    {
                         whiteBallPropieties.directionTarget = new Vector2(whiteBallPropieties.directionTarget.x, (whiteBallPropieties.directionTarget.y * (whiteBallPropieties.invertVector)));
-                        whiteBallPropieties.transform.position = new Vector2(whiteBallPropieties.aux.x, walls[i].transform.position.y + (whiteBallPropieties.whiteBallRadius*2));
-                        whiteBallPropieties.vel = whiteBallPropieties.vel / 1.5f;                   
+                        whiteBallPropieties.transform.position = new Vector2(whiteBallPropieties.transform.position.x, walls[i].transform.position.y + walls[i].wallHeight);
+                        whiteBallPropieties.vel = whiteBallPropieties.vel / 1.5f;
                     }
                     break;
                 case Wall.ColliderEdge.UP:
                     if (whiteBall.transform.position.y + whiteBallPropieties.whiteBallRadius >= (walls[i].transform.position.y))
                     {
                         whiteBallPropieties.directionTarget = new Vector2(whiteBallPropieties.directionTarget.x, (whiteBallPropieties.directionTarget.y * (whiteBallPropieties.invertVector)));
-                        whiteBallPropieties.transform.position = new Vector2(whiteBallPropieties.aux.x, walls[i].transform.position.y - (whiteBallPropieties.whiteBallRadius*2));
+                        whiteBallPropieties.transform.position = new Vector2(whiteBallPropieties.transform.position.x, walls[i].transform.position.y - walls[i].wallHeight);
                         whiteBallPropieties.vel = whiteBallPropieties.vel / 1.5f;
 
                     }
@@ -82,18 +88,16 @@ public class ballCollisions : MonoBehaviour
                     if (whiteBall.transform.position.x + whiteBallPropieties.whiteBallRadius >= (walls[i].transform.position.x))
                     {
                         whiteBallPropieties.directionTarget = new Vector2((whiteBallPropieties.directionTarget.x * (whiteBallPropieties.invertVector)), whiteBallPropieties.directionTarget.y);
-                        whiteBallPropieties.transform.position = new Vector2(walls[i].transform.position.x - (whiteBallPropieties.whiteBallRadius*2), whiteBallPropieties.aux.y);
+                        whiteBallPropieties.transform.position = new Vector2(walls[i].transform.position.x - walls[i].wallWidth, whiteBallPropieties.transform.position.y);
                         whiteBallPropieties.vel = whiteBallPropieties.vel / 1.5f;
-
                     }
                     break;
                 case Wall.ColliderEdge.LEFT:
                     if ((whiteBall.transform.position.x + whiteBallPropieties.whiteBallRadius) <= (walls[i].transform.position.x))
                     {
-                        whiteBallPropieties.directionTarget = new Vector2((whiteBallPropieties.directionTarget.x * (whiteBallPropieties.invertVector)), whiteBallPropieties.directionTarget.y);                  
-                        whiteBallPropieties.transform.position = new Vector2(walls[i].transform.position.x + (whiteBallPropieties.whiteBallRadius*2), whiteBallPropieties.aux.y);              
+                        whiteBallPropieties.directionTarget = new Vector2((whiteBallPropieties.directionTarget.x * (whiteBallPropieties.invertVector)), whiteBallPropieties.directionTarget.y);
+                        whiteBallPropieties.transform.position = new Vector2(walls[i].transform.position.x + walls[i].wallWidth, whiteBallPropieties.transform.position.y);
                         whiteBallPropieties.vel = whiteBallPropieties.vel / 1.5f;
-
                     }
                     break;
             }
@@ -117,5 +121,39 @@ public class ballCollisions : MonoBehaviour
             }
         }
     }
-    
+
+    void resetBallPos()
+    {
+        for (int i = 0; i < walls.Length; i++)
+        {
+            switch (walls[i].colliderEdge)
+            {
+                case Wall.ColliderEdge.BOTTOM:
+                    if (whiteBall.transform.position.y + whiteBallPropieties.whiteBallRadius <= (walls[i].transform.position.y))
+                    {
+                        whiteBallPropieties.transform.position = new Vector2(whiteBallPropieties.transform.position.x, walls[i].transform.position.y + walls[i].wallHeight);
+                    }
+                    break;
+                case Wall.ColliderEdge.UP:
+                    if (whiteBall.transform.position.y + whiteBallPropieties.whiteBallRadius >= (walls[i].transform.position.y))
+                    {
+                        whiteBallPropieties.transform.position = new Vector2(whiteBallPropieties.transform.position.x, walls[i].transform.position.y - walls[i].wallHeight);
+                    }
+                    break;
+                case Wall.ColliderEdge.RIGHT:
+                    if (whiteBall.transform.position.x + whiteBallPropieties.whiteBallRadius >= (walls[i].transform.position.x))
+                    {
+                        whiteBallPropieties.transform.position = new Vector2(walls[i].transform.position.x - walls[i].wallWidth, whiteBallPropieties.transform.position.y);
+                    }
+                    break;
+                case Wall.ColliderEdge.LEFT:
+                    if ((whiteBall.transform.position.x + whiteBallPropieties.whiteBallRadius) <= (walls[i].transform.position.x))
+                    {
+                        whiteBallPropieties.transform.position = new Vector2(walls[i].transform.position.x + walls[i].wallWidth, whiteBallPropieties.transform.position.y);
+                    }
+                    break;
+            }
+        }
+    }
+
 }
