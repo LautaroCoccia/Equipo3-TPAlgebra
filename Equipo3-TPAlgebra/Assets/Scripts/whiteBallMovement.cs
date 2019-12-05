@@ -44,6 +44,7 @@ public class whiteBallMovement : MonoBehaviour
     public bool isMoving = false;
     public bool firstImpact = false;
     public bool othersImpact = false;
+    public Vector2 initialWhiteBallPos;
 
     public Animator cueAnim;
     public ballCollisions ballColl;
@@ -59,6 +60,7 @@ public class whiteBallMovement : MonoBehaviour
         vel = distanceSpeed * Time.deltaTime;
         camera = Camera.main;
         aux = (Vector2)(whiteBall.transform.position);
+        initialWhiteBallPos = transform.position;
     }
 
     void FixedUpdate()
@@ -116,7 +118,7 @@ public class whiteBallMovement : MonoBehaviour
 
             yield return new WaitForEndOfFrame();
         }
-        if (vel < 0)
+        if (vel <= 0)
         {
             vel = 0.0f;
             isMoving = false;

@@ -29,14 +29,13 @@ public class ballCollisions : MonoBehaviour
     private void Start()
     {
         balls = makeTriangle.balls;
-        allCornerRadius = ballsRads.otherBallRadius;
     }
 
     void FixedUpdate()
     {
         if (whiteBallPropieties.vel > 0)
         {
-
+            allCornerRadius = ballsRads.otherBallRadius;
             calcCollisionBalls();
             CalcCollisionCorners();
             CalcCollisionWalls();
@@ -49,7 +48,6 @@ public class ballCollisions : MonoBehaviour
 
     void CalcCollisionCorners()
     {
-
         for (int i = 0; i < cornersCant; i++)
         {
             distanciasCorners[i] = Mathf.Sqrt(Mathf.Pow((whiteBall.transform.position.x - corners[i].transform.position.x), 2) + Mathf.Pow((whiteBall.transform.position.y - corners[i].transform.position.y), 2));
@@ -57,6 +55,8 @@ public class ballCollisions : MonoBehaviour
             if (distanciasCorners[i] < (allCornerRadius))
             {
                 Debug.Log("La Bola blanca entro en un agujero....");
+                whiteBallPropieties.vel = 0.0f;
+                whiteBallPropieties.transform.position = whiteBallPropieties.initialWhiteBallPos;
             }
         }
     }
