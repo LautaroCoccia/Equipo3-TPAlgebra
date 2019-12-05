@@ -71,7 +71,7 @@ public class whiteBallMovement : MonoBehaviour
    
         vecResBallMouse = ((Vector2)transform.position + (directionTarget * (vel + restRoceForce(roceForce))));
 
-        if (Input.GetKeyUp(KeyCode.Mouse0) && isMoving == false;)
+        if (Input.GetKeyUp(KeyCode.Mouse0) && isMoving == false)
         {
 
             cueAnim.SetBool("IsOnCharge", false);
