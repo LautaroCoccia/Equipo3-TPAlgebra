@@ -35,7 +35,6 @@ public class whiteBallMovement : MonoBehaviour
     //Vectors & values
     public Vector3 MousePos;
     public Vector2 directionTarget;
-    public Vector3 oppositeDirection;
     public float invertVector = -1;
     public Vector2 aux = new Vector2();
     Vector2 vecResBallMouse = new Vector2();

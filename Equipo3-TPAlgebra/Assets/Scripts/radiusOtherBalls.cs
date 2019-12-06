@@ -26,12 +26,12 @@ public class radiusOtherBalls : MonoBehaviour
     public void calcRad()
     {
 
-        otherBallX = otherBall.gameObject.transform.position.x;
-        otherBallY = otherBall.gameObject.transform.position.y;
+        otherBallX = this.gameObject.transform.position.x;
+        otherBallY = this.gameObject.transform.position.y;
         pointExtremeX = pointExtreme.gameObject.transform.position.x;
         pointExtremeY = pointExtreme.gameObject.transform.position.y;
 
-        otherBallRadius = (otherBallX + otherBallY) - (pointExtremeX + pointExtremeY);
+        otherBallRadius = (otherBallX - pointExtremeX) + (otherBallY - pointExtremeY);
 
         otherBallRadius = Mathf.Abs(otherBallRadius);
     }
